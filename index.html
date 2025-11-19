@@ -1,130 +1,167 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>allsearchenginesononepage</title>
-<style>
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background: linear-gradient(135deg,#e0eafc,#cfdef3);
-}
-.container {
-    text-align: center;
-    background: white;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    width: 100%;
-    max-width: 500px;
-}
-h1 {
-    margin-bottom: 20px;
-    font-size: 26px;
-    color: #333;
-}
-input[type="text"], select {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    font-size: 16px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-input[type="text"]:focus, select:focus {
-    border-color: #6c63ff;
-    outline: none;
-}
-button {
-    padding: 12px 25px;
-    font-size: 16px;
-    border: none;
-    border-radius: 12px;
-    background-color: #6c63ff;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-button:hover {
-    background-color: #574fd6;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>allsearchenginesononepage</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+    }
+    .container {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 550px;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 26px;
+      color: #333;
+    }
+    input[type="text"], select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    input[type="text"]:focus, select:focus {
+      border-color: #6c63ff;
+      outline: none;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      background-color: #6c63ff;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #574fd6;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-<h1>allsearchenginesononepage</h1>
-<input type="text" id="searchQuery" placeholder="Aramak istediğiniz şey...">
-<select id="searchEngine">
-<option value="">Seçiniz</option>
-<option value="google">Google</option>
-<option value="bing">Bing</option>
-<option value="yahoo">Yahoo</option>
-<option value="duckduckgo">DuckDuckGo</option>
-<option value="kagi">Kagi</option>
-<option value="ecosia">Ecosia</option>
-<option value="qwant">Qwant</option>
-<option value="startpage">Startpage</option>
-<option value="brave">Brave Search</option>
-<option value="yandex">Yandex</option>
-<option value="baidu">Baidu</option>
-<option value="ask">Ask.com</option>
-<option value="gplay">Google Play</option>
-<option value="fdroid">F-Droid</option>
-<option value="modrinth-mods">Modrinth Mods</option>
-<option value="modrinth-shaders">Modrinth Shaders</option>
-</select>
-<button onclick="search()">Ara</button>
-</div>
-<script>
-const select=document.getElementById('searchEngine')
-const savedEngine=localStorage.getItem('defaultEngine')
-if(savedEngine){
-select.value=savedEngine
-}
-document.getElementById('searchQuery').addEventListener('keypress', function(e) {
-    if(e.key === 'Enter') {
-        search()
+  <div class="container">
+    <h1>allsearchenginesononepage</h1>
+    <input type="text" id="searchQuery" placeholder="Aramak istediğiniz şey...">
+    <select id="searchEngine">
+      <option value="">Seçiniz</option>
+      <option value="google">Google</option>
+      <option value="bing">Bing</option>
+      <option value="yahoo">Yahoo</option>
+      <option value="duckduckgo">DuckDuckGo</option>
+      <option value="kagi">Kagi</option>
+      <option value="ecosia">Ecosia</option>
+      <option value="qwant">Qwant</option>
+      <option value="startpage">Startpage</option>
+      <option value="brave">Brave Search</option>
+      <option value="yandex">Yandex</option>
+      <option value="baidu">Baidu</option>
+      <option value="ask">Ask.com</option>
+      <option value="gplay">Google Play</option>
+      <option value="fdroid">F‑Droid</option>
+      <option value="modrinth-mods">Modrinth Mods</option>
+      <option value="modrinth-shaders">Modrinth Shaders</option>
+    </select>
+    <button onclick="search()">Ara</button>
+  </div>
+
+  <script>
+    const select = document.getElementById('searchEngine');
+    const savedEngine = localStorage.getItem('defaultEngine');
+    if (savedEngine) {
+      select.value = savedEngine;
     }
-})
-function search(){
-const query=document.getElementById('searchQuery').value.trim()
-const engine=select.value
-if(!engine){
-alert("Lütfen bir arama motoru seçin!")
-return
-}
-if(!query){
-alert("Lütfen aramak istediğiniz kelimeyi girin!")
-return
-}
-localStorage.setItem('defaultEngine',engine)
-let url=''
-switch(engine){
-case'google':url=`https://www.google.com/search?q=${encodeURIComponent(query)}`;break
-case'bing':url=`https://www.bing.com/search?q=${encodeURIComponent(query)}`;break
-case'yahoo':url=`https://search.yahoo.com/search?p=${encodeURIComponent(query)}`;break
-case'duckduckgo':url=`https://duckduckgo.com/?q=${encodeURIComponent(query)}`;break
-case'kagi':url=`https://kagi.com/search?q=${encodeURIComponent(query)}`;break
-case'ecosia':url=`https://www.ecosia.org/search?q=${encodeURIComponent(query)}`;break
-case'qwant':url=`https://www.qwant.com/?q=${encodeURIComponent(query)}`;break
-case'startpage':url=`https://www.startpage.com/sp/search?q=${encodeURIComponent(query)}`;break
-case'brave':url=`https://search.brave.com/search?q=${encodeURIComponent(query)}`;break
-case'yandex':url=`https://yandex.com/search/?text=${encodeURIComponent(query)}`;break
-case'baidu':url=`https://www.baidu.com/s?wd=${encodeURIComponent(query)}`;break
-case'ask':url=`https://www.ask.com/web?q=${encodeURIComponent(query)}`;break
-case'gplay':url=`https://play.google.com/store/search?q=${encodeURIComponent(query)}`;break
-case'fdroid':url=`https://f-droid.org/en/packages/?q=${encodeURIComponent(query)}`;break
-case'modrinth-mods':url=`https://modrinth.com/search?query=${encodeURIComponent(query)}&types=mod`;break
-case'modrinth-shaders':url=`https://modrinth.com/search?query=${encodeURIComponent(query)}&types=shader`;break
-}
-window.location.href=url
-}
-</script>
+
+    document.getElementById('searchQuery').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        search();
+      }
+    });
+
+    function search() {
+      const query = document.getElementById('searchQuery').value.trim();
+      const engine = select.value;
+      if (!engine) {
+        alert("Lütfen bir arama motoru seçin!");
+        return;
+      }
+      if (!query) {
+        alert("Lütfen aramak istediğiniz kelimeyi girin!");
+        return;
+      }
+      localStorage.setItem('defaultEngine', engine);
+      let url = '';
+      switch (engine) {
+        case 'google':
+          url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+          break;
+        case 'bing':
+          url = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
+          break;
+        case 'yahoo':
+          url = `https://search.yahoo.com/search?p=${encodeURIComponent(query)}`;
+          break;
+        case 'duckduckgo':
+          url = `https://duckduckgo.com/?q=${encodeURIComponent(query)}`;
+          break;
+        case 'kagi':
+          url = `https://kagi.com/search?q=${encodeURIComponent(query)}`; // Kagi search URL :contentReference[oaicite:0]{index=0}
+          break;
+        case 'ecosia':
+          url = `https://www.ecosia.org/search?q=${encodeURIComponent(query)}`;
+          break;
+        case 'qwant':
+          url = `https://www.qwant.com/?q=${encodeURIComponent(query)}`;
+          break;
+        case 'startpage':
+          url = `https://www.startpage.com/sp/search?q=${encodeURIComponent(query)}`;
+          break;
+        case 'brave':
+          url = `https://search.brave.com/search?q=${encodeURIComponent(query)}`;
+          break;
+        case 'yandex':
+          url = `https://yandex.com/search/?text=${encodeURIComponent(query)}`;
+          break;
+        case 'baidu':
+          url = `https://www.baidu.com/s?wd=${encodeURIComponent(query)}`;
+          break;
+        case 'ask':
+          url = `https://www.ask.com/web?q=${encodeURIComponent(query)}`;
+          break;
+        case 'gplay':
+          url = `https://play.google.com/store/search?q=${encodeURIComponent(query)}`;
+          break;
+        case 'fdroid':
+          url = `https://search.f-droid.org/?q=${encodeURIComponent(query)}`; // F‑Droid arama URL’si :contentReference[oaicite:1]{index=1}
+          break;
+        case 'modrinth-mods':
+          url = `https://modrinth.com/search?query=${encodeURIComponent(query)}&facets=["project_type:mod"]`;
+          break;
+        case 'modrinth-shaders':
+          url = `https://modrinth.com/search?query=${encodeURIComponent(query)}&facets=["project_type:shader"]`;
+          break;
+      }
+      window.location.href = url;
+    }
+  </script>
 </body>
 </html>
