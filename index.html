@@ -73,8 +73,6 @@
       <option value="startpage">Startpage</option>
       <option value="brave">Brave Search</option>
       <option value="yandex">Yandex</option>
-      <option value="baidu">Baidu</option>
-      <option value="ask">Ask.com</option>
       <option value="gplay">Google Play</option>
       <option value="fdroid">F‑Droid</option>
       <option value="modrinth-mods">Modrinth Mods</option>
@@ -141,23 +139,17 @@
         case 'yandex':
           url = `https://yandex.com/search/?text=${encodeURIComponent(query)}`;
           break;
-        case 'baidu':
-          url = `https://www.baidu.com/s?wd=${encodeURIComponent(query)}`;
-          break;
-        case 'ask':
-          url = `https://www.ask.com/web?q=${encodeURIComponent(query)}`;
-          break;
         case 'gplay':
           url = `https://play.google.com/store/search?q=${encodeURIComponent(query)}`;
           break;
         case 'fdroid':
-          url = `https://search.f-droid.org/?q=${encodeURIComponent(query)}`; // F‑Droid arama URL’si :contentReference[oaicite:1]{index=1}
+          url = `https://search.f-droid.org/?q=${encodeURIComponent(query)}`;
           break;
         case 'modrinth-mods':
-          url = `https://modrinth.com/search?query=${encodeURIComponent(query)}&facets=["project_type:mod"]`;
+          url = `https://modrinth.com/mods?q=${encodeURIComponent(query)}`;
           break;
         case 'modrinth-shaders':
-          url = `https://modrinth.com/search?query=${encodeURIComponent(query)}&facets=["project_type:shader"]`;
+          url = `https://modrinth.com/shaders=${encodeURIComponent(query)}`;
           break;
       }
       window.location.href = url;
