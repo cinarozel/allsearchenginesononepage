@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>allsearchenginesononepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>allsearchenginesononepage</h1>
+        <input type="text" id="searchQuery" placeholder="Aramak istediğiniz şey...">
+        <select id="searchEngine">
+            <option value="">Seçiniz</option>
+            <option value="google">Google</option>
+            <option value="bing">Bing</option>
+        </select>
+        <button onclick="search()">Ara</button>
+    </div>
+
+    <script>
+        const select = document.getElementById('searchEngine');
+
+        // Daha önce seçilmiş motoru yükle
+        const savedEngine = localStorage.getItem('defaultEngine');
+        if (savedEngine) {
+            select.value = savedEngine;
+        }
+
+        function search() {
+            const query = document.getElementById('searchQuery').value.trim();
+            const engine = select.value;
+
+            if (!engine) {
+                alert("Lütfen bir arama motoru seçin!");
+                return;
+            }
+            if (!query) {
+                alert("Lütfen aramak istediğiniz kelimeyi girin!");
+                return;
+            }
+
+            // Seçilen motoru kaydet
+            localStorage.setItem('defaultEngine', engine);
+
+            let url = '';
+            switch(engine) {
+                case 'google':
+                    url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                    break;
+                case 'bing':
+                    url = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
+                    break;
+            }
+
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
