@@ -194,6 +194,7 @@ const engines = [
 ];
 
 const list = document.getElementById("engineList");
+
 engines.forEach(e => {
   const div = document.createElement("div");
   div.className = "engineItem";
@@ -247,6 +248,13 @@ function search() {
   }
   window.location.href=url;
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  const savedEngine = localStorage.getItem("selectedEngine");
+  if (savedEngine) {
+    selectEngine(savedEngine);
+  }
+});
 </script>
 </body>
 </html>
