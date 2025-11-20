@@ -32,7 +32,6 @@ body {
   max-width:1150px;
 }
 
-/* LEFT PANEL */
 .container {
   flex:1;
   padding:40px;
@@ -99,7 +98,6 @@ button:hover {
   box-shadow:0 10px 25px rgba(127,99,255,0.55);
 }
 
-/* RIGHT PANEL */
 .sidebox {
   flex-basis:300px;
   background:rgba(255,255,255,0.05);
@@ -164,14 +162,12 @@ button:hover {
 <body>
 
 <div class="wrapper">
-  <!-- LEFT MAIN UI -->
   <div class="container">
     <h1>AllSearchEnginesOn1Page</h1>
     <input type="text" id="searchQuery" placeholder="Search for something...">
     <button onclick="search()">Search</button>
   </div>
 
-  <!-- RIGHT ENGINE LIST -->
   <div class="sidebox">
     <h3>Search Engine Finder</h3>
     <input type="text" id="engineFilter" placeholder="Search engine...">
@@ -209,8 +205,9 @@ engines.forEach(e => {
 
 function selectEngine(id) {
   window.selectedEngine = id;
+  localStorage.setItem("selectedEngine", id); 
   document.querySelectorAll(".engineItem").forEach(item => {
-    item.style.background = item.dataset.id===id?"rgba(127,99,255,0.3)":"";
+    item.style.background = item.dataset.id === id ? "rgba(127,99,255,0.3)" : "";
   });
 }
 
