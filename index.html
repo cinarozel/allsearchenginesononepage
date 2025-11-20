@@ -177,7 +177,7 @@ button:hover {
 
 <script>
 const engines = [
-  { id:"wikipedia",  name:"Wikipedia", icon:"https://en.wikipedia.org/favicon.ico" },
+  { id:"wikipedia-en",  name:"Wikipedia(en)", icon:"https://en.wikipedia.org/favicon.ico" },
   { id:"google",  name:"Google", icon:"https://www.google.com/favicon.ico" },
   { id:"bing",    name:"Bing", icon:"https://www.bing.com/sa/simg/favicon-2x.ico" },
   { id:"yahoo",   name:"Yahoo", icon:"https://s.yimg.com/rz/l/favicon.ico" },
@@ -232,7 +232,7 @@ function search() {
   const encoded = encodeURIComponent(query);
   let url = "";
   switch (engine){
-    case "wikipedia": url=`https://wikipedia.org/w/index.php?go=Go&search=${encoded}`; break;
+    case "wikipedia-en": url=`https://wikipedia.org/w/index.php?go=Go&search=${encoded}`; break;
     case "google": url=`https://www.google.com/search?q=${encoded}`; break;
     case "bing": url=`https://www.bing.com/search?q=${encoded}`; break;
     case "yahoo": url=`https://search.yahoo.com/search?p=${encoded}`; break;
