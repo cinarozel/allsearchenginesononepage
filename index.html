@@ -1,159 +1,255 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AllSearchEnginesOn1Page</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background: linear-gradient(135deg, #e0eafc, #cfdef3);
-    }
-    .container {
-      text-align: center;
-      background: white;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-      width: 100%;
-      max-width: 550px;
-    }
-    h1 {
-      margin-bottom: 20px;
-      font-size: 26px;
-      color: #333;
-    }
-    input[type="text"], select {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      font-size: 16px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
-    input[type="text"]:focus, select:focus {
-      border-color: #6c63ff;
-      outline: none;
-    }
-    button {
-      padding: 12px 25px;
-      font-size: 16px;
-      border: none;
-      border-radius: 12px;
-      background-color: #6c63ff;
-      color: white;
-      cursor: pointer;
-      transition: background 0.3s;
-      margin-top: 10px;
-    }
-    button:hover {
-      background-color: #574fd6;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AllSearchEnginesOn1Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+body {
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:"Poppins",sans-serif;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  transition: background 0.3s;
+  color: #111;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(135deg, #1c1c1c, #2c2c2c);
+    color: #fff;
+  }
+}
+
+.wrapper {
+  display:flex;
+  gap:25px;
+  width:95%;
+  max-width:1150px;
+}
+
+/* LEFT PANEL */
+.container {
+  flex:1;
+  padding:40px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(12px);
+  border-radius:18px;
+  box-shadow:0 0 35px rgba(0,0,0,0.2);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.container h1 {
+  text-align:center;
+  margin-bottom:25px;
+  font-size:28px;
+  font-weight:600;
+}
+
+input, button {
+  width:100%;
+  box-sizing:border-box;
+  font-size:16px;
+  border-radius:12px;
+  outline:none;
+  margin-bottom:15px;
+}
+
+input {
+  padding:12px 14px;
+  background: rgba(255,255,255,0.3);
+  border: none;
+  transition:0.25s;
+  color: #111;
+}
+
+input:focus {
+  background: rgba(255,255,255,0.5);
+  box-shadow:0 0 10px rgba(127,99,255,0.4);
+  transform:scale(1.02);
+}
+
+@media (prefers-color-scheme: dark) {
+  input {
+    background: rgba(255,255,255,0.1);
+    color:white;
+  }
+}
+
+button {
+  padding:12px 0;
+  font-size:16px;
+  background:linear-gradient(135deg,#7f63ff,#a38bff);
+  color:white;
+  border:none;
+  cursor:pointer;
+  transition:0.25s;
+  font-weight:500;
+  box-shadow:0 5px 15px rgba(127,99,255,0.35);
+}
+
+button:hover {
+  transform:scale(1.04);
+  box-shadow:0 10px 25px rgba(127,99,255,0.55);
+}
+
+/* RIGHT PANEL */
+.sidebox {
+  flex-basis:300px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 0 30px rgba(0,0,0,0.2);
+  display:flex;
+  flex-direction:column;
+}
+
+.sidebox h3 {
+  font-size:19px;
+  margin-bottom:12px;
+}
+
+.sidebox input {
+  padding:12px 14px;
+  font-size:16px;
+  background: rgba(255,255,255,0.3);
+  color:#111;
+  border:none;
+  border-radius:12px;
+  outline:none;
+  margin-bottom:12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .sidebox input {
+    background: rgba(255,255,255,0.1);
+    color:white;
+  }
+}
+
+.engineList {
+  margin-top:5px;
+  max-height:470px;
+  overflow-y:auto;
+}
+
+.engineItem {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.15s;
+}
+
+.engineItem:hover {
+  background:rgba(255,255,255,0.18);
+}
+
+.engineItem img {
+  width:26px;
+  height:26px;
+  border-radius:6px;
+}
+</style>
 </head>
 <body>
+
+<div class="wrapper">
+  <!-- LEFT MAIN UI -->
   <div class="container">
-    <h1>AllSearchEnginesOn1Page</h1>
-    <input type="text" id="searchQuery" placeholder="Aramak istediğiniz şey...">
-    <select id="searchEngine">
-      <option value="">Seçiniz</option>
-      <option value="google">Google</option>
-      <option value="bing">Bing</option>
-      <option value="yahoo">Yahoo</option>
-      <option value="duckduckgo">DuckDuckGo</option>
-      <option value="kagi">Kagi</option>
-      <option value="ecosia">Ecosia</option>
-      <option value="qwant">Qwant</option>
-      <option value="startpage">Startpage</option>
-      <option value="brave">Brave Search</option>
-      <option value="yandex">Yandex</option>
-      <option value="gplay">Google Play</option>
-      <option value="fdroid">F‑Droid</option>
-      <option value="modrinth-mods">Modrinth Mods</option>
-      <option value="modrinth-shaders">Modrinth Shaders</option>
-    </select>
-    <button onclick="search()">Ara</button>
+    <h1>All Search Engines</h1>
+    <input type="text" id="searchQuery" placeholder="Search for something...">
+    <button onclick="search()">Search</button>
   </div>
 
-  <script>
-    const select = document.getElementById('searchEngine');
-    const savedEngine = localStorage.getItem('defaultEngine');
-    if (savedEngine) {
-      select.value = savedEngine;
-    }
+  <!-- RIGHT ENGINE LIST -->
+  <div class="sidebox">
+    <h3>Search Engine Finder</h3>
+    <input type="text" id="engineFilter" placeholder="Search engine...">
+    <div class="engineList" id="engineList"></div>
+  </div>
+</div>
 
-    document.getElementById('searchQuery').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        search();
-      }
-    });
+<script>
+const engines = [
+  { id:"google",  name:"Google", icon:"https://www.google.com/favicon.ico" },
+  { id:"bing",    name:"Bing", icon:"https://www.bing.com/sa/simg/favicon-2x.ico" },
+  { id:"yahoo",   name:"Yahoo", icon:"https://s.yimg.com/rz/l/favicon.ico" },
+  { id:"duckduckgo", name:"DuckDuckGo", icon:"https://duckduckgo.com/favicon.ico" },
+  { id:"kagi",    name:"Kagi", icon:"https://kagi.com/favicon.ico" },
+  { id:"ecosia",  name:"Ecosia", icon:"https://www.ecosia.org/static/icons/favicon.ico" },
+  { id:"qwant",   name:"Qwant", icon:"https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/qwant.svg" },
+  { id:"startpage", name:"Startpage", icon:"https://www.startpage.com/sp/cdn/favicons/favicon--default.ico" },
+  { id:"brave",   name:"Brave Search", icon:"https://brave.com/favicon.ico" },
+  { id:"yandex",  name:"Yandex", icon:"https://yandex.com/favicon.ico" },
+  { id:"gplay",   name:"Google Play", icon:"https://play.google.com/favicon.ico" },
+  { id:"fdroid",  name:"F-Droid", icon:"https://f-droid.org/assets/favicon.ico" },
+  { id:"modrinth-mods", name:"Modrinth Mods", icon:"https://modrinth.com/favicon.ico" },
+  { id:"modrinth-shaders", name:"Modrinth Shaders", icon:"https://modrinth.com/favicon.ico" }
+];
 
-    function search() {
-      const query = document.getElementById('searchQuery').value.trim();
-      const engine = select.value;
-      if (!engine) {
-        alert("Lütfen bir arama motoru seçin!");
-        return;
-      }
-      if (!query) {
-        alert("Lütfen aramak istediğiniz kelimeyi girin!");
-        return;
-      }
-      localStorage.setItem('defaultEngine', engine);
-      let url = '';
-      switch (engine) {
-        case 'google':
-          url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-          break;
-        case 'bing':
-          url = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
-          break;
-        case 'yahoo':
-          url = `https://search.yahoo.com/search?p=${encodeURIComponent(query)}`;
-          break;
-        case 'duckduckgo':
-          url = `https://duckduckgo.com/?q=${encodeURIComponent(query)}`;
-          break;
-        case 'kagi':
-          url = `https://kagi.com/search?q=${encodeURIComponent(query)}`; // Kagi search URL :contentReference[oaicite:0]{index=0}
-          break;
-        case 'ecosia':
-          url = `https://www.ecosia.org/search?q=${encodeURIComponent(query)}`;
-          break;
-        case 'qwant':
-          url = `https://www.qwant.com/?q=${encodeURIComponent(query)}`;
-          break;
-        case 'startpage':
-          url = `https://www.startpage.com/sp/search?q=${encodeURIComponent(query)}`;
-          break;
-        case 'brave':
-          url = `https://search.brave.com/search?q=${encodeURIComponent(query)}`;
-          break;
-        case 'yandex':
-          url = `https://yandex.com/search/?text=${encodeURIComponent(query)}`;
-          break;
-        case 'gplay':
-          url = `https://play.google.com/store/search?q=${encodeURIComponent(query)}`;
-          break;
-        case 'fdroid':
-          url = `https://search.f-droid.org/?q=${encodeURIComponent(query)}`;
-          break;
-        case 'modrinth-mods':
-          url = `https://modrinth.com/mods?q=${encodeURIComponent(query)}`;
-          break;
-        case 'modrinth-shaders':
-          url = `https://modrinth.com/shaders?q=${encodeURIComponent(query)}`;
-          break;
-      }
-      window.location.href = url;
-    }
-  </script>
+const list = document.getElementById("engineList");
+engines.forEach(e => {
+  const div = document.createElement("div");
+  div.className = "engineItem";
+  div.dataset.id = e.id;
+  div.innerHTML = `<img src="${e.icon}"><span>${e.name}</span>`;
+  div.onclick = () => selectEngine(e.id);
+  list.appendChild(div);
+});
+
+function selectEngine(id) {
+  window.selectedEngine = id;
+  document.querySelectorAll(".engineItem").forEach(item => {
+    item.style.background = item.dataset.id===id?"rgba(127,99,255,0.3)":"";
+  });
+}
+
+document.getElementById("engineFilter").addEventListener("input", e => {
+  const value = e.target.value.toLowerCase();
+  document.querySelectorAll(".engineItem").forEach(item => {
+    item.style.display = item.innerText.toLowerCase().includes(value)?"flex":"none";
+  });
+});
+
+document.getElementById("searchQuery").addEventListener("keydown", e => {
+  if (e.key === "Enter") search();
+});
+
+function search() {
+  const query = document.getElementById("searchQuery").value.trim();
+  const engine = window.selectedEngine;
+  if (!engine) return alert("Please select a search engine!");
+  if (!query) return alert("Please type something to search!");
+  const encoded = encodeURIComponent(query);
+  let url = "";
+  switch (engine){
+    case "google": url=`https://www.google.com/search?q=${encoded}`; break;
+    case "bing": url=`https://www.bing.com/search?q=${encoded}`; break;
+    case "yahoo": url=`https://search.yahoo.com/search?p=${encoded}`; break;
+    case "duckduckgo": url=`https://duckduckgo.com/?q=${encoded}`; break;
+    case "kagi": url=`https://kagi.com/search?q=${encoded}`; break;
+    case "ecosia": url=`https://www.ecosia.org/search?q=${encoded}`; break;
+    case "qwant": url=`https://www.qwant.com/?q=${encoded}`; break;
+    case "startpage": url=`https://www.startpage.com/sp/search?q=${encoded}`; break;
+    case "brave": url=`https://search.brave.com/search?q=${encoded}`; break;
+    case "yandex": url=`https://yandex.com/search/?text=${encoded}`; break;
+    case "gplay": url=`https://play.google.com/store/search?q=${encoded}`; break;
+    case "fdroid": url=`https://search.f-droid.org/?q=${encoded}`; break;
+    case "modrinth-mods": url=`https://modrinth.com/mods?q=${encoded}`; break;
+    case "modrinth-shaders": url=`https://modrinth.com/shaders?q=${encoded}`; break;
+  }
+  window.location.href=url;
+}
+</script>
 </body>
 </html>
